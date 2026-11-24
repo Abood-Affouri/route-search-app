@@ -150,9 +150,11 @@ def greedy(graph, coordinates, start, goal):
         if city in visited:
             continue
         visited.add(city)
-        steps += 1
-        if city == goal:
-            return {"path": path, "cost": cost, "steps": steps}
+
+if city == goal:
+    return {"path": path, "cost": cost, "steps": steps}
+
+steps += 1
         for neighbor in sorted(graph[city]):
             if neighbor not in visited:
                 if neighbor not in coordinates:
