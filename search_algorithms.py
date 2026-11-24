@@ -133,32 +133,47 @@ def astar(graph, coordinates, start, goal):
 
 
 
+
 def greedy(graph, coordinates, start, goal):
-    if start not in graph or goal not in graph:
-        return {"path": None, "cost": None, "steps": 0}
-    if start not in coordinates or goal not in coordinates:
-        raise ValueError("Missing coordinates for start or goal")
-    frontier = [(heuristic(coordinates, start, goal), start, [start], 0)]
+    pq = [(heuristic(coordinates, start, goal), start, [start], 0)]
+
     visited = set()
     steps = 0
-    while frontier:
-        _, city, path, cost = heapq.heappop(frontier)
+
+    while pq:
+        h, city, path, cost = heapq.heappop(pq)
+
         if city in visited:
             continue
+
         visited.add(city)
 
-if city == goal:
-    return {"path": path, "cost": cost, "steps": steps}
+        if city == goal:
+            return {
+                "path": path,
+                "cost": cost,
+                "steps": steps
+            }
 
-steps += 1
+        steps += 1
+
         for neighbor in sorted(graph[city]):
             if neighbor not in visited:
-                if neighbor not in coordinates:
-                    raise ValueError(f"Missing coordinates for {neighbor}")
-                heapq.heappush(frontier, (
-                    heuristic(coordinates, neighbor, goal),
-                    neighbor,
-                    path + [neighbor],
-                    cost + graph[city][neighbor],
-                ))
-    return {"path": None, "cost": None, "steps": steps}
+                edge_cost = graph[city][neighbor]
+
+                heapq.heappush(
+                    pq,
+                    (
+                        heuristic(coordinates, neighbor, goal),
+                        neighbor,
+                        path + [neighbor],
+                        cost + edge_cost
+                    )
+                )
+
+    return {
+        "path": None,
+        "cost": None,
+        "steps": steps
+    }
+
