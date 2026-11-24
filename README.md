@@ -1,4 +1,4 @@
-# West Bank Route Finder — Mohammad's Independent Module
+# West Bank Route Finder
 
 Personal contribution: **Greedy Best-First Search**, Streamlit interface, and `Compare All` framework. Team integration is required before running the full application.
 
