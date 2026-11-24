@@ -3,10 +3,14 @@ from comparison import compare_all
 from search_algorithms import greedy
 import search_algorithms as search
 
-try:
-    from sample_data import graph, coordinates
-except ImportError:
-    graph, coordinates = None, None
+from map_utils import load_map, validate_map
+from map_utils import build_graph, get_coordinates
+
+map_data = load_map("westbank_map.json")
+validate_map(map_data)
+
+graph = build_graph(map_data)
+coordinates = get_coordinates(map_data)
 
 st.set_page_config(page_title="West Bank Search", layout="wide")
 st.title("West Bank Route Finder")
