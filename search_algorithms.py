@@ -134,10 +134,6 @@ def astar(graph, coordinates, start, goal):
 
 
 def greedy(graph, coordinates, start, goal):
-    """Greedy Best-First Search. Steps = unique expanded nodes, including goal.
-
-    Tie-break: (heuristic, city name). Graph: {city: {neighbor: edge_cost}}.
-    """
     if start not in graph or goal not in graph:
         return {"path": None, "cost": None, "steps": 0}
     if start not in coordinates or goal not in coordinates:
